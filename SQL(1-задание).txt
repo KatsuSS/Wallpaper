@@ -1,0 +1,2 @@
+select name, department, salary FROM employee where (department,salary) in 
+(select department, max(salary) frim employee group by department)
