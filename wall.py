@@ -1,9 +1,11 @@
 import click
 import datetime
 import calendar
-
+import os
 import requests
+
 from bs4 import BeautifulSoup
+import lxml
 import re
 
 
@@ -31,10 +33,11 @@ def session(ses, url):
 
 def create_file(link, ses):
     filename = link.split('/')[-1]
+    path = os.path.join(os.getcwd(), filename)
     img = session(ses, link)
     img = img.content
     try:
-        with open(filename, 'wb') as output_file:
+        with open(path, 'wb') as output_file:
             output_file.write(img)
     except IOError as e:
         print(e)
